@@ -17,7 +17,7 @@ class ProjectViewModel @Inject constructor(
 ) : ViewModel() {
     
     // Configurar seu nome de usuário do GitHub aqui
-    private val gitHubUsername = "SEU_USUARIO_GITHUB"
+    private val gitHubUsername = "libertychain"
     
     private val _uiState = MutableStateFlow<ProjectUiState>(ProjectUiState.Loading)
     val uiState: StateFlow<ProjectUiState> = _uiState.asStateFlow()
