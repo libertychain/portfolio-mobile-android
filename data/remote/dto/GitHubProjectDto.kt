@@ -4,23 +4,20 @@ import com.google.gson.annotations.SerializedName
 
 data class GitHubProjectDto(
     @SerializedName("id")
-    val id: Int,
-    
+    val id: Long,
     @SerializedName("name")
     val name: String,
-    
+    @SerializedName("full_name")
+    val fullName: String,
     @SerializedName("description")
     val description: String?,
-    
+    @SerializedName("html_url")
+    val htmlUrl: String,
     @SerializedName("language")
     val language: String?,
-    
     @SerializedName("stargazers_count")
-    val stars: Int,
-    
-    @SerializedName("html_url")
-    val url: String,
-    
-    @SerializedName("updated_at")
-    val updatedAt: String
+    val stargazersCount: Int,
+    @SerializedName("forks_count")
+    val forksCount: Int
+    // Você pode adicionar mais campos aqui conforme necessário da API do GitHub
 )

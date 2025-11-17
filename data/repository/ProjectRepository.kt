@@ -3,8 +3,10 @@ package com.example.meucartaodevisitas.data.repository
 import com.example.meucartaodevisitas.data.local.dao.ProjectDao
 import com.example.meucartaodevisitas.data.local.entity.ProjectEntity
 import com.example.meucartaodevisitas.data.remote.GitHubApiService
+import com.example.meucartaodevisitas.data.remote.dto.GitHubProjectDto // Import adicionado anteriormente
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import kotlin.Result // CORREÇÃO: Importando kotlin.Result
 
 class ProjectRepository @Inject constructor(
     private val projectDao: ProjectDao,
@@ -22,15 +24,15 @@ class ProjectRepository @Inject constructor(
     suspend fun syncProjectsFromGitHub(username: String): Result<Unit> {
         return try {
             val gitHubProjects = apiService.getUserRepositories(username)
-            val projectEntities = gitHubProjects.map { dto ->
+            val projectEntities = gitHubProjects.map { dto: GitHubProjectDto -> // CORREÇÃO: Especificando o tipo do dto explicitamente
                 ProjectEntity(
-                    id = dto.id,
+                    id = dto.id.toInt(), // CORREÇÃO: Convertido Long para Int
                     name = dto.name,
                     description = dto.description ?: "Sem descrição",
                     language = dto.language,
-                    stars = dto.stars,
-                    url = dto.url,
-                    updatedAt = dto.updatedAt
+                    stars = dto.stargazersCount, // CORREÇÃO: Mapeado de stargazersCount para stars
+                    url = dto.htmlUrl, // CORREÇÃO: Mapeado de htmlUrl para url
+                    updatedAt = "" // CORREÇÃO: Adicionando valor padrão temporário para updatedAt (não existe no DTO)
                 )
             }
             

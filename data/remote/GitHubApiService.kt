@@ -1,5 +1,9 @@
 package com.example.meucartaodevisitas.data.remote
 
+import retrofit2.http.GET
+import retrofit2.http.Path
+import com.example.meucartaodevisitas.data.remote.dto.GitHubProjectDto // CORREÇÃO: Importando GitHubProjectDto
+
 interface GitHubApiService {
 
     @GET("users/{username}/repos")

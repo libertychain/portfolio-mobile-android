@@ -13,6 +13,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.meucartaodevisitas.data.local.entity.ProjectEntity
+import kotlin.String
+import kotlin.text.lowercase // CORREÇÃO: Adicionando import explícito para lowercase
 
 @Composable
 fun ProjectCard(
@@ -56,12 +58,12 @@ fun ProjectCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // Linguagem
-                project.language?.let { language ->
+                if (project.language != null) {
                     AssistChip(
                         onClick = { },
-                        label = { Text(language) },
+                        label = { Text(project.language) },
                         colors = AssistChipDefaults.assistChipColors(
-                            containerColor = getLanguageColor(language)
+                            containerColor = getLanguageColor(project.language)
                         )
                     )
                 }
@@ -97,6 +99,6 @@ private fun getLanguageColor(language: String): Color {
         "go" -> Color(0xFF00ADD8)
         "rust" -> Color(0xFFCE422B)
         "ruby" -> Color(0xFFCC342D)
-        else -> MaterialTheme.colorScheme.primaryContainer
+        else -> Color.Gray
     }
 }
